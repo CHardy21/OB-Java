@@ -20,6 +20,11 @@ public class sesion3Clases {
 		SmartWath reloj2 = new SmartWath("NNXD", "rojo");
 		
 		System.out.println(reloj2);
-	}
+		
+		var variable = 'a';
+		
+		System.out.println(((Object)variable).getClass().getSimpleName());
 
+	}
+	
 }
