@@ -1,7 +1,12 @@
 package com.obchardy.ejercicios;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Scanner;
 import java.util.Vector;
 
 public class ejercicios7_8_9 {
@@ -104,16 +109,82 @@ public class ejercicios7_8_9 {
 		// A continuación, con otro bucle, recórrelo y elimina los numeros pares. 
 		// Por último, vuelve a recorrerlo y muestra el ArrayList final. 
 		// Si te atreves, puedes hacerlo en menos pasos, siempre y cuando cumplas el primer "for" de relleno.
+		System.out.println("=======================");
 		
+		ArrayList<Integer> listaEnteros = new ArrayList<Integer>();
+		
+		for(int i=1;i<11;i++) {
+			listaEnteros.add(i);
+		}
+		
+		System.out.println("ListaEnteros: ");
+		System.out.println(listaEnteros);
+		
+		for(int i=0;i<listaEnteros.size(); i++) {
+			if(listaEnteros.get(i) %2 == 0) {
+				listaEnteros.remove(i);
+			}
+		}
+		System.out.println("ListaEnteros sin Números pares: ");
+		System.out.println(listaEnteros);
 		
 		
 		// Crea una función DividePorCero. 
 		// Esta, debe generar una excepción ("throws") a su llamante del tipo ArithmeticException que será capturada por su llamante (desde "main", por ejemplo). 
 		// Si se dispara la excepción, mostraremos el mensaje "Esto no puede hacerse". 
 		// Finalmente, mostraremos en cualquier caso: "Demo de código".
+		System.out.println("=======================");
+		
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Ingresa 2 números enteros.(Dividendo y Divisor)");
+			
+			int num1= scanner.nextInt();
+			int num2= scanner.nextInt();
+			
+			try {
+				Double resultado = DividePorCero(num1, num2);
+				System.out.println("Resultado: "+ resultado);
+				
+			} catch (ArithmeticException e) {
+				System.out.println("Esto no puede hacerse.");
+				
+			} catch (Exception e) {
+				System.out.println(e.getClass());
+				
+			}finally {
+				System.out.println("Demo de código");
+				scanner.close();
+			}
+
 
 		// Utilizando InputStream y PrintStream, crea una función que reciba dos parámetros: "fileIn" y "fileOut". 
 		// La tarea de la función será realizar la copia del fichero dado en el parámetro "fileIn" al fichero dado en "fileOut".
+		System.out.println("=======================");	
+		
+		try {
+			
+			InputStream fichero = new FileInputStream("D:\\CHardyE-Projects\\Java\\Practicas\\OpenBootcamp-Java\\com.ob-java\\practicasOB\\src\\com\\obchardy\\ejercicios\\input_texto.txt");
+					
+			try{
+				byte[] datos = fichero.readAllBytes();
+				for(byte dato : datos) {
+					System.out.print((char) dato);
+				}
+				
+			} catch (IOException e){
+				System.out.println("Ups! No puedo leer los datos. msg: "+ e.getMessage());
+			}
+			
+		} catch(FileNotFoundException e){
+			
+			System.out.println("Ups! ha ocurrido un problema. msg: "+e.getLocalizedMessage());
+		} 
+			
+			
+	
+		
+		
+		
 
 		// Sorpréndenos creando un programa de tu elección que utilice InputStream, PrintStream, excepciones, un HashMap y un ArrayList, LinkedList o array.
 		
@@ -127,8 +198,10 @@ public class ejercicios7_8_9 {
 		return textoAlreves;
 	}
 	
+	public static Double DividePorCero(int num1 , int num2) throws ArithmeticException {
+		return (double) (num1/num2);
+	}
 	
-
 	
 }
 
