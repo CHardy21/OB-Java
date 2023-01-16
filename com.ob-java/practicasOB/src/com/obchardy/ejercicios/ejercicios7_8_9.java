@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -163,17 +164,32 @@ public class ejercicios7_8_9 {
 		
 		try {
 			
-			InputStream fichero = new FileInputStream("D:\\CHardyE-Projects\\Java\\Practicas\\OpenBootcamp-Java\\com.ob-java\\practicasOB\\src\\com\\obchardy\\ejercicios\\input_texto.txt");
+			InputStream ficheroIn = new FileInputStream("D:\\CHardyE-Projects\\Java\\Practicas\\OpenBootcamp-Java\\com.ob-java\\practicasOB\\src\\com\\obchardy\\ejercicios\\input_texto.txt");
 					
 			try{
-				byte[] datos = fichero.readAllBytes();
+				byte[] datos = ficheroIn.readAllBytes();
+				System.out.println("contenido de ficheroIn: ");
 				for(byte dato : datos) {
 					System.out.print((char) dato);
 				}
+				ficheroIn.close();
+				
+				PrintStream ficheroOut = new PrintStream("output_texto.txt");
+				ficheroOut.println("hola ficheroOut.");
+				ficheroOut.write(datos);
+				
+				
+				System.out.println("contenido de ficheroOut: ");
+				System.out.print(ficheroOut);
+				ficheroOut.close();
 				
 			} catch (IOException e){
 				System.out.println("Ups! No puedo leer los datos. msg: "+ e.getMessage());
 			}
+			
+
+			
+			
 			
 		} catch(FileNotFoundException e){
 			
